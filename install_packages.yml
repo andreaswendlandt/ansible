@@ -1,0 +1,19 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+  - name: include variables
+    include_vars:
+      dir: vars
+      extensions:
+        - yml
+  - name: install base packages
+    ansible.builtin.apt:
+      pkg: "{{ item }}"
+      state: latest
+      cache_valid_time: 3600
+    with_items: "{{ base_packages }}"
+  - name: cleanup
+    ansible.builtin.apt:
+      autoremove: yes
+      autoclean: yes
