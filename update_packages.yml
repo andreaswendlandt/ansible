@@ -6,3 +6,7 @@
     ansible.builtin.apt:
       name: "*"
       state: latest
+  - name: cleanup
+    ansible.builtin.apt:
+      autoremove: yes
+      autoclean: yes
