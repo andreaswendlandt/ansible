@@ -4,3 +4,4 @@ base_packages:
   - aptitude
   - fdisk
   - ufw
+  - jq
