@@ -6,3 +6,4 @@ base_packages:
   - ufw
   - jq
   - tree
+  - tmux
