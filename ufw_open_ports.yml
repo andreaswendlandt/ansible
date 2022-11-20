@@ -1,0 +1,21 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+  - name: include variables
+    include_vars:
+      dir: vars
+      extensions:
+        - yml
+  - name: allow port 8081 to 8085 for tcp
+    community.general.ufw:
+      rule: allow
+      proto: tcp
+      port: '{{ item }}'
+    with_items: "{{ ports_open }}"
+  - name: allow port 8081 to 8085 for udp
+    community.general.ufw:
+      rule: allow
+      proto: udp
+      port: '{{ item }}'
+    with_items: "{{ ports_open }}"
