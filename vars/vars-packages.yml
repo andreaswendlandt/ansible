@@ -8,3 +8,4 @@ base_packages:
   - tree
   - tmux
   - ncdu
+  - stress
