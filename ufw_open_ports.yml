@@ -1,19 +1,16 @@
 ---
 - hosts: all
   become: yes
+  vars_files:
+    - vars/vars-ports.yml
   tasks:
-  - name: include variables
-    include_vars:
-      dir: vars
-      extensions:
-        - yml
-  - name: allow port 8081 to 8085 for tcp
+  - name: allow port 8081 to 8086 and 3000 for tcp
     community.general.ufw:
       rule: allow
       proto: tcp
       port: '{{ item }}'
     with_items: "{{ ports_open }}"
-  - name: allow port 8081 to 8085 for udp
+  - name: allow port 8081 to 8086 and 3000 for udp
     community.general.ufw:
       rule: allow
       proto: udp

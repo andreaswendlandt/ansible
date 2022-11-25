@@ -1,12 +1,9 @@
 ---
 - hosts: all
   become: yes
+  vars_files:
+    - vars/vars-packages.yml
   tasks:
-  - name: include variables
-    include_vars:
-      dir: vars
-      extensions:
-        - yml
   - name: install base packages
     ansible.builtin.apt:
       pkg: "{{ item }}"
