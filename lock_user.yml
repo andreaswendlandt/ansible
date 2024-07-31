@@ -1,0 +1,20 @@
+---
+- hosts: all
+  become: yes
+  become_user: root
+  gather_facts: no
+
+  vars:
+    user_to_lock: malicious_user
+
+  tasks:
+  - name: read /etc/passwd
+    changed_when: false
+    ansible.builtin.getent:
+      database: passwd
+
+  - name: set shell to /bin/false for {{ user_to_lock }} in case he is in /etc/passwd
+    ansible.builtin.user:
+      name: "{{ user_to_lock }}"
+      shell: /bin/false
+    when: 'user_to_lock | string in ansible_facts.getent_passwd'
